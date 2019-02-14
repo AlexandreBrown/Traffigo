@@ -1,0 +1,229 @@
+﻿<UserControl x:Class="TraffiGo.Vues.SimulationExistanteVueUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TraffiGo.Vues"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1280">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!-- Row 0 -->
+        <Rectangle Grid.Row="0" Grid.Column="0" Fill="{StaticResource DarkGray}" Stroke="Black" StrokeThickness="2"/>
+        <!-- Header -->
+        <DockPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="&#xf019;" FontFamily="{StaticResource FontAwesome}" Foreground="White" FontSize="32" VerticalAlignment="Center"></TextBlock>
+            <Label Content="Simulation existante" Style="{StaticResource Title}" Foreground="White" VerticalAlignment="Center"></Label>
+        </DockPanel>
+
+
+        <!-- Row 1 -->
+        <Rectangle Grid.Row="1" Grid.Column="0" Fill="{StaticResource BlueGreen}" Stroke="Black" StrokeThickness="2"/>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Column 0 --><!--
+            <DockPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Margin="0,10,0,10">
+                <Border BorderBrush="{Binding SearchBarBorderColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" BorderThickness="1" CornerRadius="3" Padding="2" Background="White">
+                    <TextBox Name="txbSearchBar" Text="{Binding TxtRechercheDoc,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="275" VerticalAlignment="Center" BorderThickness="0">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <TextBlock Text="&#xf002;  Recherche" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center" Foreground="Gray"></TextBlock>
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </Border>
+            </DockPanel>-->
+
+
+            <TabControl  Margin="20,35,0,60" SelectedIndex="{Binding HeaderSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" BorderBrush="Black" ItemsSource="{Binding TabsInfoSimulation,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" BorderThickness="2,2,2,0" Background="{StaticResource MidDarkGray}">
+                
+                <TabControl.Resources >
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="2,2,2,0" BorderBrush="Black" CornerRadius="4,4,0,0" Margin="5,0,2,0">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="{StaticResource DarkBlueGreen}" />
+                                            <Setter Property="Foreground" Value="White" />
+                                        </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                            <Setter TargetName="Border" Property="Background" Value="#999999" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+                <TabItem Header="Personnelles">
+                    <DataGrid HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch"  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Mode=Default, Path=DataContext.SimulationsPrivees}" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedItem}" SelectionMode="Single" Background="{StaticResource MidDarkGray}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding CmdLoadSelected}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background" Value="{StaticResource LightBlue}" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="Date de création" Binding="{Binding DateCreation}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background" Value="{StaticResource LightBlue}" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="Auteur" Binding="{Binding Auteur}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background" Value="{StaticResource LightBlue}" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem Header="Publiques" >
+                    <DataGrid HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch"  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Mode=Default, Path=DataContext.SimulationsPubliques}" AutoGenerateColumns="False" IsReadOnly="True"  SelectedItem="{Binding SelectedItem}" SelectionMode="Single" Background="{StaticResource MidDarkGray}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding CmdLoadSelected}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background" Value="{StaticResource LightBlue}" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="Date de création" Binding="{Binding DateCreation}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background" Value="{StaticResource LightBlue}" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="Auteur" Binding="{Binding Auteur}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background" Value="{StaticResource LightBlue}" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+            </TabControl>
+            <Rectangle Grid.Row="0" Grid.Column="0" Fill="{StaticResource LightGray}" Grid.ColumnSpan="1" Height="40" Stroke="Black" Margin="20,0,0,20" StrokeThickness="2" VerticalAlignment="Bottom"/>
+            
+
+            <!-- Column 1 -->
+            <Rectangle Grid.Row="0" Grid.Column="1" Fill="{StaticResource LightGray}" Grid.ColumnSpan="1" Height="50" Stroke="Black" Margin="20,59,20,0" StrokeThickness="2" VerticalAlignment="Top"/>
+            <TextBlock FontSize="30" Text="Aperçu" Grid.Row="0" Grid.Column="1" Style="{StaticResource SubTitle}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="20,67,20,20"></TextBlock>
+            
+            <!-- Grille de simulation (aperçu) -->
+            <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-10,0,0">
+                <Canvas Height="{Binding GrilleSimulationHeightChargement}" Width="{Binding GrilleSimulationWidthChargement}" Background="{StaticResource GrayChemin}">
+                    <ItemsControl  ItemsSource="{Binding LstCases,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Canvas>
+                                                <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="{Binding Fill}" Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}" Canvas.Left="{Binding MarginLeft}" Canvas.Top="{Binding MarginTop}"/>
+                                            </Canvas>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Canvas>
+            </StackPanel>
+
+            <Rectangle Grid.Row="0" Grid.Column="1" Fill="{StaticResource LightGray}" Grid.ColumnSpan="1" Height="100" Stroke="Black" Margin="20,20,20,20" StrokeThickness="2" VerticalAlignment="Bottom"/>
+            
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,40" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                
+                <Button Height="55" Width="200" Command="{Binding CmdChargerSimulation}">
+                    <DockPanel VerticalAlignment="Center">
+                        <TextBlock Text="&#xf019;  Charger" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                    </DockPanel>
+                </Button>
+                
+                <Button Name="btnTest" Height="55" Width="200" Margin="20,0,0,0" Command="{Binding CmdRenommerSimulation}">
+                    <DockPanel VerticalAlignment="Center">
+                        <TextBlock Text="&#xf14b;  Renommer" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                    </DockPanel>
+                </Button>
+                
+                <Button Height="55" Width="200" Margin="20,0,0,0" Command="{Binding CmdSupprimerSimulation}" >
+                    <DockPanel VerticalAlignment="Center">
+                        <TextBlock Text="&#xf014;  Supprimer" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                    </DockPanel>
+                </Button>
+            
+            </StackPanel>
+        </Grid>
+
+        <!-- Row 2 -->
+        <Rectangle Grid.Row="2" Grid.Column="0" Fill="{StaticResource DarkGray}" Stroke="Black" StrokeThickness="2"/>
+        <!-- Footer -->
+        <DockPanel Grid.Row="2" Grid.Column="0" Margin="{StaticResource MarginBottomButtons}" VerticalAlignment="Center">
+            <Button Height="50" Width="200" Command="{Binding CmdRetourMenuPrincipal}" HorizontalAlignment="Left">
+                <DockPanel VerticalAlignment="Bottom">
+                    <TextBlock Text="&#xf0a8;  Retour" FontFamily="{StaticResource FontAwesome}"></TextBlock>
+                </DockPanel>
+            </Button>
+        </DockPanel>
+    </Grid>
+</UserControl>

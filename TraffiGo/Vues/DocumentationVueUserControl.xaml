@@ -1,0 +1,138 @@
+﻿<UserControl x:Class="TraffiGo.Vues.DocumentationVueUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:wi="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1280">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!-- Row 0 -->
+        <Rectangle Grid.Row="0" Grid.Column="0" Fill="{StaticResource DarkGray}" Stroke="Black" StrokeThickness="2"/>
+        <!-- Header -->
+        <DockPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="&#xf02d;" FontFamily="{StaticResource FontAwesome}" Style="{StaticResource SubTitle}" Foreground="White" VerticalAlignment="Center"></TextBlock>
+            <Label Content="Documentation" Style="{StaticResource Title}" Foreground="White" VerticalAlignment="Center"/>
+        </DockPanel>
+
+
+        <!-- Row 1 -->
+        <!-- Doc navigation pane -->
+        <Grid Grid.Row="1" Grid.Column="0" Background="{StaticResource MidDarkGray}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="2"/>
+            <Border BorderBrush="Black" BorderThickness="2" CornerRadius="30" Margin="5,5,5,5" Background="{StaticResource LightBlue}">
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <!-- Search bar -->
+                    <DockPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Margin="0,10,0,10">
+                        <Border BorderBrush="{Binding SearchBarBorderColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" BorderThickness="1" CornerRadius="3" Padding="2" Background="White">
+                            <TextBox Name="txbSearchBar" Text="{Binding TxtRechercheDoc,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="275" VerticalAlignment="Center" BorderThickness="0">
+                                <wi:Interaction.Triggers>
+                                    <wi:EventTrigger EventName="KeyDown">
+                                        <wi:InvokeCommandAction Command="{Binding CmdOnKeyDownSearchBar}" />
+                                    </wi:EventTrigger>
+                                    <wi:EventTrigger EventName="KeyUp">
+                                        <wi:InvokeCommandAction Command="{Binding CmdOnKeyUpSearchBar}" />
+                                    </wi:EventTrigger>
+                                </wi:Interaction.Triggers>
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <Style.Resources>
+                                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <Label Content="Entrez un mot clé" Foreground="Gray" />
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                                <Setter Property="Background" Value="White" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Border>
+                    </DockPanel>
+                    
+                    <!-- Procedures -->
+                    <ScrollViewer Grid.Row="1" Grid.Column="0" Width="325" Height="470" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+                        <StackPanel Background="#27303d">
+                            <ItemsControl ItemsSource="{Binding ProceduresToShow,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                
+                                <!-- Les procédures seront dans un StackPanel -->
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Width="{Binding Width}" Height="{Binding Height}" Content="{Binding TitreProcedure}" Command="{Binding CommandToExecute}" CommandParameter="{Binding TitreProcedure}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+
+                            </ItemsControl>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+
+
+            <!-- Doc description-->
+            <Rectangle Grid.Row="0" Grid.Column="1" Fill="{StaticResource BlueGreen}" Stroke="Black" StrokeThickness="2"/>
+            <StackPanel Grid.Row="0" Grid.Column="1">
+                <Border BorderBrush="Black" BorderThickness="2" CornerRadius="30" Height="60" Margin="0,10,0,0">
+                    <Label Content="{Binding CurrentDocTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SubTitle}"/>
+                </Border>
+                <ContentPresenter Content="{Binding DocActuelle}" Height="504" Width="904"></ContentPresenter>
+            </StackPanel>
+
+        </Grid>
+
+
+        <!-- Row 2 -->
+        <Rectangle Grid.Row="2" Grid.Column="0" Fill="{StaticResource DarkGray}" Stroke="Black" StrokeThickness="2"/>
+        <!-- Footer -->
+        <DockPanel Grid.Row="2" Grid.Column="0" Margin="{StaticResource MarginBottomButtons}">
+            <Button Height="50" Width="200" HorizontalAlignment="Left" Margin="0,0,20,0" Command="{Binding CmdRetourMenuPrincipal}">
+                <DockPanel VerticalAlignment="Center">
+                    <TextBlock Text="&#xf0a8;  Retour" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                </DockPanel>
+            </Button>
+        </DockPanel>
+    </Grid>
+</UserControl>

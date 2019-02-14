@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="TraffiGo.Vues.Documentation.TerminologieDocUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TraffiGo.Vues.Documentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="480" d:DesignWidth="800">
+    <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Background="SlateGray">
+
+                <DockPanel>
+                    <TextBlock Text="Voie : Surface sur laquelle les véhicules se déplacent."
+                               Style="{StaticResource DocTxt}"/>
+                    <Border BorderBrush="Black" BorderThickness="2" Style="{StaticResource DocImgBorder}">
+                        <Image Source="/Resources/Images/Documentation/Voie.jpg"/>
+                    </Border>
+                </DockPanel>
+
+                <Separator Background="Black"/>
+                
+                <DockPanel>
+                    <TextBlock Text="Direction : Représente vers où la voie se dirige.Il existe plusieurs directions et il est possible qu'une voie ait plusieurs directions , par exemple une voie qui peut tourner à gauche ou aller tout droit est considérée comme une voie à deux directions."
+                               Style="{StaticResource DocTxt}"/>
+                    <Border BorderBrush="Black" BorderThickness="2" Style="{StaticResource DocImgBorder}">
+                        <Image Source="/Resources/Images/Documentation/Direction.jpg"/>
+                    </Border>
+                </DockPanel>
+
+                <Separator Background="Black"/>
+                
+                <DockPanel>
+                    <TextBlock Text="Route : Un regroupement de voies distinct."
+                               Style="{StaticResource DocTxt}"/>
+                    <Border BorderBrush="Black" BorderThickness="2" Style="{StaticResource DocImgBorder}">
+                        <Image Source="/Resources/Images/Documentation/Route.jpg"/>
+                    </Border>
+                </DockPanel>
+
+                <Separator Background="Black"/>
+                
+                <DockPanel>
+                    <TextBlock Text="Orientation d'une route: Point de cardinalité à laquelle une route fait face."
+                               Style="{StaticResource DocTxt}"/>
+                    <Border BorderBrush="Black" BorderThickness="2" Style="{StaticResource DocImgBorder}">
+                        <Image Source="/Resources/Images/Documentation/OrientationRoute.jpg"/>
+                    </Border>
+                </DockPanel>
+
+                <Separator Background="Black"/>
+
+                <DockPanel>
+                    <TextBlock Text="Chemins : Un regroupement de une à deux routes juxtaposées avec des orientations différentes."
+                               Style="{StaticResource DocTxt}"/>
+                    <Border BorderBrush="Black" BorderThickness="2" Style="{StaticResource DocImgBorder}">
+                        <Image Source="/Resources/Images/Documentation/Chemin.jpg"/>
+                    </Border>
+                </DockPanel>
+
+                <Separator Background="Black"/>
+
+                <DockPanel>
+                    <TextBlock Text="Orientation d'un chemein: Point de cardinalité qui est utilisé pour représenter l'emplacement d'un chemin."
+                               Style="{StaticResource DocTxt}"/>
+                    <Border BorderBrush="Black" BorderThickness="2" Style="{StaticResource DocImgBorder}">
+                        <Image Source="/Resources/Images/Documentation/OrientationChemin.jpg"/>
+                    </Border>
+                </DockPanel>
+
+                <Separator Background="Black"/>
+
+
+                <DockPanel>
+                    <TextBlock Text="Intersection : Une intersection est un élément que l'on peut intégrer à la grille de simulation.Une intersection est une case ou au moins deux chemins se croisent."
+                               Style="{StaticResource DocTxt}"/>
+                    <Border BorderBrush="Black" BorderThickness="2" Style="{StaticResource DocImgBorder}">
+                        <Image Source="/Resources/Images/Documentation/Intersection.jpg"/>
+                    </Border>
+                </DockPanel>
+
+                <Separator Background="Black"/>
+
+
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

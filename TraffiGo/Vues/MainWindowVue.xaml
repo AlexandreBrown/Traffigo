@@ -1,0 +1,18 @@
+﻿<Window x:Class="TraffiGo.Vues.MainWindowVue"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="TraffiGo" Height="720" Width="1280"
+        Icon="../Resources/Images/LOGO.ico"
+        ResizeMode="CanMinimize">
+    <Grid>
+        <!-- Vue -->
+        <ContentPresenter Content="{Binding VueActuelle}" IsEnabled="{Binding VueIsEnabled,UpdateSourceTrigger=PropertyChanged}" />
+        <!-- Dialog -->
+        <ContentControl Content="{Binding Dialog}" IsEnabled="{Binding DialogIsEnabled,UpdateSourceTrigger=PropertyChanged}"  Panel.ZIndex="98"/>
+        <!-- Dialog -->
+        <ContentControl Content="{Binding DialogOverDialog}" Panel.ZIndex="99"/>
+    </Grid>
+</Window>

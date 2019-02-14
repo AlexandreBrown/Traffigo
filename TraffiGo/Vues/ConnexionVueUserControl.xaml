@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="TraffiGo.Vues.ConnexionVueUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:wi="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:local="clr-namespace:TraffiGo.Vues"
+             xmlns:Attached="clr-namespace:TraffiGo.VueModeles"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1280">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!-- Row 0 -->
+        <Rectangle Grid.Row="0" Grid.Column="0" Fill="{StaticResource DarkGray}" Stroke="Black" StrokeThickness="2"/>
+        <!-- Header -->
+        <Rectangle Fill="#5a5c5e" Width="250" Height="55" Margin="0,0,5,0" Stroke="#848587" StrokeThickness="2" RadiusX="20" RadiusY="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <DockPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50">
+            <TextBlock Text="&#xf1b9;" FontFamily="{StaticResource FontAwesome}"  FontSize="32" VerticalAlignment="Center"></TextBlock>
+            <Label Content="TraffiGo" Style="{StaticResource Title}" Foreground="{StaticResource Green}"></Label>
+        </DockPanel>
+
+
+        <!-- Row 1 -->
+        <Rectangle Grid.Row="1" Grid.Column="0" Fill="{StaticResource BlueGreen}" Stroke="Black" StrokeThickness="2"/>
+        <!-- Login interface -->
+        <Border Grid.Row="1" Grid.Column="0" Height="400" Width="700" Background="{StaticResource LightBlue}" BorderBrush="Black" BorderThickness="2" CornerRadius="30,30,30,30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Header section -->
+                <Border BorderThickness="1" Grid.Row="0" CornerRadius="30,30,0,0" BorderBrush="Black" Background="{StaticResource DarkBlueGreen}"></Border>
+                <DockPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Text="&#xf2be;" FontFamily="{StaticResource FontAwesome}" FontSize="32" VerticalAlignment="Center"></TextBlock>
+                    <Label Content="Connexion" Style="{StaticResource SubTitle}" VerticalAlignment="Center"></Label>
+                </DockPanel>
+
+                <!--Information section -->
+                <Grid Grid.Row="1" Grid.Column="0" Width="600" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Titles -->
+                    <Label Grid.Row="0" Grid.Column="0" Content="Nom d'utilisateur" Style="{StaticResource SubTitle}" HorizontalAlignment="Left" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="0" Content=":" Style="{StaticResource SubTitle}" HorizontalAlignment="Right" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" Content="Mot de passe" Style="{StaticResource SubTitle}" HorizontalAlignment="Left" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content=":" Style="{StaticResource SubTitle}" HorizontalAlignment="Right" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <!-- Text entries -->
+                    <TextBox Name="txbUsername" Grid.Row="0" Grid.Column="1" Text="{Binding TxtNomUtilisateur,UpdateSourceTrigger=PropertyChanged}" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <PasswordBox Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center">
+                        <wi:Interaction.Triggers>
+                            <wi:EventTrigger EventName="PasswordChanged">
+                                <ei:CallMethodAction TargetObject="{Binding}" MethodName="OnPasswordChanged"/>
+                            </wi:EventTrigger>
+                        </wi:Interaction.Triggers>
+                    </PasswordBox>
+                </Grid>
+
+                <!-- Connection button section -->
+                <DockPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Center">
+                    <Button Height="40" Width="300" IsDefault="True" Command="{Binding CmdConnecterCompte}">
+                        <DockPanel VerticalAlignment="Center">
+                            <TextBlock Text="&#xf090;  Se connecter" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                        </DockPanel>
+                    </Button>
+                </DockPanel>
+            </Grid>
+        </Border>
+
+
+        <!-- Row 2 -->
+        <Rectangle Grid.Row="2" Grid.Column="0" Fill="{StaticResource DarkGray}" Stroke="Black" StrokeThickness="2"/>
+        <!-- Footer -->
+        <DockPanel Grid.Row="2" Grid.Column="0" Margin="{StaticResource MarginBottomButtons}">
+            <Button Height="50" Width="200" HorizontalAlignment="Left" Margin="0,0,20,0" Command="{Binding CmdRetourAccueil}">
+                <DockPanel VerticalAlignment="Center">
+                    <TextBlock Text="&#xf0a8;  Retour" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                </DockPanel>
+            </Button>
+        </DockPanel>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,216 @@
+<Application x:Class="TraffiGo.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" StartupUri="./Vues/MainWindowVue.xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d" xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+  <Application.Resources>
+    <ResourceDictionary>
+      <!-- Colors -->
+        <SolidColorBrush x:Key="Green" Color="#139346" />
+        <SolidColorBrush x:Key="DarkGray" Color="#333333" />
+        <SolidColorBrush x:Key="MidDarkGray" Color="#57585b"/>
+        <SolidColorBrush x:Key="LightGray" Color="#999999"/>
+        <SolidColorBrush x:Key="VeryLightGray" Color="#cccccc"/>
+        <SolidColorBrush x:Key="DarkBlueGreen" Color="#0c343d" />
+        <SolidColorBrush x:Key="LightBlue" Color="#45818e" />
+        <SolidColorBrush x:Key="DarkBlue" Color="#000080" />
+        <SolidColorBrush x:Key="BlueGreen" Color="#134f5c" />
+        <SolidColorBrush x:Key="Hover" Color="#139346" />
+        <SolidColorBrush x:Key="SoftBlue" Color="#6fa8dc"/>
+        <SolidColorBrush x:Key="Cyan" Color="#a2c4c9" />
+        <SolidColorBrush x:Key="KindaRed" Color="#e06666"/>
+        <SolidColorBrush x:Key="PrettyRed" Color="#cc0000"/>
+        <SolidColorBrush x:Key="AlmostPrettyRed" Color="#cf2a27"/>
+        <SolidColorBrush x:Key="GrayStreet" Color="#777777"/>
+        <SolidColorBrush x:Key="GrayChemin" Color="#343a38"/>
+
+        <Color x:Key="CyanColor" R="162" G="196" B="201"/>
+        <Color x:Key="KindaRedColor" R="224" G="102" B="102"/>
+        <Color x:Key="PrettyRedColor" R="204" G="0" B="0"/>
+        <Color x:Key="DarkBlueGreenColor" R="12" G="52" B="61" />
+            <!-- Font Awesome -->
+      <FontFamily x:Key="FontAwesome">/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome</FontFamily>
+        
+        
+        <!-- Title -->
+        <Style x:Key="Title">
+        <Setter Property="TextElement.FontFamily" Value="Resources/Fonts/#Keep Calm Med">
+        </Setter>
+        <Setter Property="TextElement.FontSize" Value="42">
+        </Setter>
+        </Style>
+        <!-- SubTitle -->
+        <Style x:Key="SubTitle">
+        <Setter Property="TextElement.FontFamily" Value="Resources/Fonts/#Keep Calm Med">
+        </Setter>
+        <Setter Property="TextElement.FontSize" Value="32">
+        </Setter>
+        </Style>
+        <!-- SubSubTitle -->
+        <Style x:Key="SubSubTitle">
+            <Setter Property="TextElement.FontFamily" Value="Resources/Fonts/#Keep Calm Med">
+            </Setter>
+            <Setter Property="TextElement.FontSize" Value="25">
+            </Setter>
+        </Style>
+        <!-- Description -->
+        <Style x:Key="Description">
+            <Setter Property="TextElement.FontFamily" Value="Resources/Fonts/#Keep Calm Med">
+            </Setter>
+            <Setter Property="TextElement.FontSize" Value="16">
+            </Setter>
+        </Style>
+            <!-- DialogTitle -->
+            <Style x:Key="DialogTitle">
+                <Setter Property="TextElement.FontFamily" Value="Resources/Fonts/#Keep Calm Med">
+                </Setter>
+                <Setter Property="TextElement.FontSize" Value="36">
+                </Setter>
+            </Style>
+            <!-- DialogMessage -->
+            <Style x:Key="DialogMessage">
+                <Setter Property="TextElement.FontFamily" Value="Resources/Fonts/#Keep Calm Med">
+                </Setter>
+                <Setter Property="TextElement.FontSize" Value="20">
+                </Setter>
+            </Style>
+
+
+            <!-- Margins -->
+      <Thickness x:Key="MarginBottomButtons" Bottom="0" Left="10" Right="10" Top="0" />
+        
+      <!-- Border doc img -->
+      <Style x:Key="DocImgBorder">
+        <Setter Property="Border.VerticalAlignment" Value="Center" />
+        <Setter Property="Border.HorizontalAlignment" Value="Center" />
+        <Setter Property="Border.Margin" Value="0,20,20,20" />
+      </Style>
+        
+      <!-- Font size doc -->
+      <Style x:Key="DocTxt">
+        <Setter Property="TextElement.FontSize" Value="20" />
+        <Setter Property="TextBlock.TextAlignment" Value="Left" />
+        <Setter Property="TextBlock.Margin" Value="20" />
+        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+        <Setter Property="TextBlock.Width" Value="400" />
+      </Style>
+        
+        <!-- Checkbox -->
+        <Style x:Key="CheckBoxStyle1" TargetType="{x:Type CheckBox}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+                <Setter Property="IsChecked" Value="True"/>
+                <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="OnChecking">
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="slider" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="25"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="OnUnchecking">
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="slider" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <ThicknessAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="slider" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                                    <SplineThicknessKeyFrame KeyTime="00:00:00.3000000" Value="1,1,1,1"/>
+                                </ThicknessAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+
+                        <DockPanel x:Name="dockPanel">
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" RecognizesAccessKey="True" VerticalAlignment="Center"/>
+                            <Grid Margin="5,5,0,5" Width="50" Background="#FFC0CCD9">
+                                    <TextBlock Text="ON" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" FontSize="12" HorizontalAlignment="Left" Margin="2,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Right" TextAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Bold" Text="OFF" TextWrapping="Wrap" Margin="0,0,3,0"/>
+                                <Border HorizontalAlignment="Left" x:Name="slider" Width="23" BorderThickness="1,1,1,1" CornerRadius="3,3,3,3" RenderTransformOrigin="0.5,0.5" Margin="0,1,1,1">
+                                    <Border.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                            <SkewTransform AngleX="0" AngleY="0"/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform X="0" Y="0"/>
+                                        </TransformGroup>
+                                    </Border.RenderTransform>
+                                    <Border.BorderBrush>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FFFFFFFF" Offset="0"/>
+                                            <GradientStop Color="#FF4490FF" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.BorderBrush>
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#061c21" Offset="1"/>
+                                            <GradientStop Color="#0c343d" Offset="0"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Grid>
+                        </DockPanel>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource OnUnchecking}" x:Name="OnUnchecking_BeginStoryboard"/>
+                                </Trigger.ExitActions>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource OnChecking}" x:Name="OnChecking_BeginStoryboard"/>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Button -->
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="TextElement.Foreground" Value="WhiteSmoke">
+            </Setter>
+            <Setter Property="TextElement.FontSize" Value="16">
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="grid">
+                            <Border x:Name="border" CornerRadius="4" BorderBrush="Black" BorderThickness="1,2,5,4" Background="{DynamicResource DarkBlueGreen}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" TextElement.FontWeight="Bold">
+                                </ContentPresenter>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5" />
+                                                    <TranslateTransform X="0.02" Y="0.3" />
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#0c343d" Offset="1" />
+                                            <GradientStop Color="#000000" Offset="0.3" />
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Hover}" />
+                                <Setter Property="Foreground" Value="{DynamicResource Hover}" />
+                            </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="grid" Value="0.25" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

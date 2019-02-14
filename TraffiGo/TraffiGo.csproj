@@ -1,0 +1,748 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8ED43A21-36C8-4663-A2FF-650F93B8B9ED}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TraffiGo</RootNamespace>
+    <AssemblyName>TraffiGo</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Costura, Version=1.6.2.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Costura.Fody.1.6.2\lib\dotnet\Costura.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicrosoftExpressionInteractions.3.0.40218.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyChanged, Version=2.1.4.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.2.1.4\lib\netstandard1.0\PropertyChanged.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="CodeBits\PasswordGenerator.cs" />
+    <Compile Include="Converters\NiveauTraficConverter.cs" />
+    <Compile Include="Modeles\AbortableBackgroundworker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Modeles\Case.cs" />
+    <Compile Include="Modeles\ClasseSql\MySqlDirectionsFeux.cs" />
+    <Compile Include="Modeles\ClasseSql\MySqlDirectionsVoies.cs" />
+    <Compile Include="Modeles\ClasseSql\MySqlFeux.cs" />
+    <Compile Include="Modeles\ClasseSql\MySqlRoutes.cs" />
+    <Compile Include="Modeles\ClasseSql\MySqlVoies.cs" />
+    <Compile Include="Modeles\Courriel.cs" />
+    <Compile Include="Modeles\DirectionVoieGraphique.cs" />
+    <Compile Include="Modeles\Element.cs" />
+    <Compile Include="Modeles\ExstensionMethod.cs" />
+    <Compile Include="Modeles\FeuGraphique.cs" />
+    <Compile Include="Modeles\Generator.cs" />
+    <Compile Include="Modeles\GridMath.cs" />
+    <Compile Include="Modeles\Data\Jsonify.cs" />
+    <Compile Include="Modeles\Messages\ChangementDialog\MessageChangerDialogOverDialog.cs" />
+    <Compile Include="Modeles\Messages\MessageModifyDirections.cs" />
+    <Compile Include="Modeles\Messages\MessageSaveChanges.cs" />
+    <Compile Include="Modeles\Messages\MessageSimHasChanged.cs" />
+    <Compile Include="Modeles\Messages\MessageUpdateCycleFeuSelectionne.cs" />
+    <Compile Include="Modeles\Messages\MessageUpdateFeuSelectionne.cs" />
+    <Compile Include="Modeles\Messages\MessageUpdateLstDirectionsVoie.cs" />
+    <Compile Include="Modeles\Messages\MessageUpdateLstFeuxVoies.cs" />
+    <Compile Include="Modeles\Messages\MessageUpdateTempsFeuJaune.cs" />
+    <Compile Include="Modeles\Messages\MessageUpdateTempsFeuVert.cs" />
+    <Compile Include="Modeles\Validator.cs" />
+    <Compile Include="Modeles\VoieGraphique.cs" />
+    <Compile Include="VueModeles\EditionIntersection\EditionIntersectionVueModele.cs" />
+    <Compile Include="VueModeles\EditionIntersection\IntersectionVueModele.cs" />
+    <Compile Include="VueModeles\Dialogs\MessageSuccesVueModele.cs" />
+    <Compile Include="VueModeles\Dialogs\MessageYesNoCancelVueModele.cs" />
+    <Compile Include="VueModeles\Dialogs\ModifierMotPasseVueModele.cs" />
+    <Compile Include="VueModeles\Dialogs\ReinitialiserMotPasseVueModele.cs" />
+    <Compile Include="VueModeles\Dialogs\RenommerSimulationVueModele.cs" />
+    <Compile Include="VueModeles\Dialogs\SauvegarderSimulationVueModele.cs" />
+    <Compile Include="Modeles\Messages\ChangementDialog\MessageChangerDialog.cs" />
+    <Compile Include="Modeles\ClasseSql\MySqlChemins.cs" />
+    <Compile Include="Modeles\ClasseSql\MySqlConnexion.cs" />
+    <Compile Include="Modeles\ClasseSql\MySqlIntersections.cs" />
+    <Compile Include="Modeles\ClasseSql\MySqlSimulations.cs" />
+    <Compile Include="Modeles\ClasseSql\MySqlUtilisateurs.cs" />
+    <Compile Include="Modeles\ClasseSql\MySqlVehicules.cs" />
+    <Compile Include="Modeles\Data\Chemin.cs" />
+    <Compile Include="Modeles\Data\CouleurFeu.cs" />
+    <Compile Include="Modeles\Data\Feu.cs" />
+    <Compile Include="Modeles\Data\Simulation.cs" />
+    <Compile Include="Modeles\Data\Direction.cs" />
+    <Compile Include="Modeles\Data\Intersection.cs" />
+    <Compile Include="Modeles\Data\Orientation.cs" />
+    <Compile Include="Modeles\Data\Route.cs" />
+    <Compile Include="Modeles\Data\Trafic.cs" />
+    <Compile Include="Modeles\Data\TypeVehicule.cs" />
+    <Compile Include="Modeles\Data\Utilisateur.cs" />
+    <Compile Include="Modeles\Data\Vehicule.cs" />
+    <Compile Include="Modeles\Data\Voie.cs" />
+    <Compile Include="Vues\EditionIntersection\EditionIntersectionVueUserControl.xaml.cs">
+      <DependentUpon>EditionIntersectionVueUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\EditionIntersection\IntersectionUserControl.xaml.cs">
+      <DependentUpon>IntersectionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\DialogMessage\DialogListener.cs" />
+    <Compile Include="Vues\DialogMessage\MessageDialog.cs" />
+    <Compile Include="Vues\Dialogs\MessageSuccesUserControl.xaml.cs">
+      <DependentUpon>MessageSuccesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Dialogs\MessageYesNoCancelUserControl.xaml.cs">
+      <DependentUpon>MessageYesNoCancelUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Dialogs\ModifierMotPasseUserControl.xaml.cs">
+      <DependentUpon>ModifierMotPasseUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Dialogs\ReinitialiserMotPasseUserControl.xaml.cs">
+      <DependentUpon>ReinitialiserMotPasseUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Dialogs\RenommerSimulationUserControl.xaml.cs">
+      <DependentUpon>RenommerSimulationUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Dialogs\SauvegarderSimulationUserControl.xaml.cs">
+      <DependentUpon>SauvegarderSimulationUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\FocusHelper.cs" />
+    <Compile Include="VueModeles\AccueilVueModele.cs" />
+    <Compile Include="Modeles\Messages\ChangementVue\MessageChangerVue.cs" />
+    <Compile Include="VueModeles\SimulationExistanteVueModele.cs" />
+    <Compile Include="VueModeles\ConnexionVueModele.cs" />
+    <Compile Include="VueModeles\CreationCompteVueModele.cs" />
+    <Compile Include="VueModeles\Dialogs\MessageErreurVueModele.cs" />
+    <Compile Include="VueModeles\DocumentationVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\AjouterIntersectionDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\AjouterRouteDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\ChangerDirectionVoieDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\ChangerDureeSimulationDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\ChangerNiveauTraficDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\ChangerOrdreFeuxDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\ChangerTempsFeuJauneDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\ChangerTempsFeuVertDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\ChangerTypesVehiculesDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\ChargerSimulationDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\CreerSimulationDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\EditionIntersectionDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\LancerSimulationDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\RenommerSimulationDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\SauvegarderSimulationDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\SupprimerElemSimulationDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\SupprimerSimulationDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\TerminologieDocVueModele.cs" />
+    <Compile Include="VueModeles\Documentation\ViderGrilleDocVueModele.cs" />
+    <Compile Include="VueModeles\MainWindowVueModele.cs" />
+    <Compile Include="VueModeles\MenuPrincipalVueModele.cs" />
+    <Compile Include="VueModeles\EditionSimulationVueModele.cs" />
+    <Compile Include="VueModeles\VueModeleBase.cs" />
+    <Compile Include="Vues\AccueilVueUserControl.xaml.cs">
+      <DependentUpon>AccueilVueUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\SimulationExistanteVueUserControl.xaml.cs">
+      <DependentUpon>SimulationExistanteVueUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\ConnexionVueUserControl.xaml.cs">
+      <DependentUpon>ConnexionVueUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Dialogs\MessageErreurUserControl.xaml.cs">
+      <DependentUpon>MessageErreurUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\DocumentationVueUserControl.xaml.cs">
+      <DependentUpon>DocumentationVueUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\AjouterIntersectionDocUserControl.xaml.cs">
+      <DependentUpon>AjouterIntersectionDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\AjouterRouteDocUserControl.xaml.cs">
+      <DependentUpon>AjouterRouteDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\ChangerDirectionVoieDocUserControl.xaml.cs">
+      <DependentUpon>ChangerDirectionVoieDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\ChangerDureeSimulationDocUserControl.xaml.cs">
+      <DependentUpon>ChangerDureeSimulationDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\ChangerNiveauTraficDocUserControl.xaml.cs">
+      <DependentUpon>ChangerNiveauTraficDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\ChangerOrdreFeuxDocUserControl.xaml.cs">
+      <DependentUpon>ChangerOrdreFeuxDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\ChangerTempsFeuJauneDocUserControl.xaml.cs">
+      <DependentUpon>ChangerTempsFeuJauneDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\ChangerTempsFeuVertDocUserControl.xaml.cs">
+      <DependentUpon>ChangerTempsFeuVertDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\ChangerTypesVehiculesDocUserControl.xaml.cs">
+      <DependentUpon>ChangerTypesVehiculesDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\ChargerSimulationDocUserControl.xaml.cs">
+      <DependentUpon>ChargerSimulationDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\CreerSimulationDocUserControl.xaml.cs">
+      <DependentUpon>CreerSimulationDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\EditionIntersectionDocUserControl.xaml.cs">
+      <DependentUpon>EditionIntersectionDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\LancerSimulationDocUserControl.xaml.cs">
+      <DependentUpon>LancerSimulationDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\RenommerSimulationDocUserControl.xaml.cs">
+      <DependentUpon>RenommerSimulationDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\SauvegarderSimulationDocUserControl.xaml.cs">
+      <DependentUpon>SauvegarderSimulationDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\SupprimerElemSimulationDocUserControl.xaml.cs">
+      <DependentUpon>SupprimerElemSimulationDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\SupprimerSimulationDocUserControl.xaml.cs">
+      <DependentUpon>SupprimerSimulationDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\TerminologieDocUserControl.xaml.cs">
+      <DependentUpon>TerminologieDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Documentation\ViderGrilleDocUserControl.xaml.cs">
+      <DependentUpon>ViderGrilleDocUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\MenuPrincipalVueUserControl.xaml.cs">
+      <DependentUpon>MenuPrincipalVueUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\EditionSimulationVueUserControl.xaml.cs">
+      <DependentUpon>EditionSimulationVueUserControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Vues\EditionIntersection\IntersectionUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Dialogs\MessageYesNoCancelUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Dialogs\ModifierMotPasseUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Dialogs\ReinitialiserMotPasseUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Dialogs\RenommerSimulationUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\SimulationExistanteVueUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\CreationCompteVueUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\EditionIntersection\EditionIntersectionVueUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Dialogs\MessageErreurUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Dialogs\MessageSuccesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Dialogs\SauvegarderSimulationUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\DocumentationVueUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\AjouterIntersectionDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\AjouterRouteDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\ChangerDirectionVoieDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\ChangerDureeSimulationDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\ChangerNiveauTraficDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\ChangerOrdreFeuxDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\ChangerTempsFeuJauneDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\ChangerTempsFeuVertDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\ChangerTypesVehiculesDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\ChargerSimulationDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\CreerSimulationDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\EditionIntersectionDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\LancerSimulationDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\RenommerSimulationDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\SauvegarderSimulationDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\SupprimerElemSimulationDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\SupprimerSimulationDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\TerminologieDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Documentation\ViderGrilleDocUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\MainWindowVue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Vues\CreationCompteVueUserControl.xaml.cs">
+      <DependentUpon>CreationCompteVueUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\MainWindowVue.xaml.cs">
+      <DependentUpon>MainWindowVue.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Vues\AccueilVueUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\ConnexionVueUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\MenuPrincipalVueUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\EditionSimulationVueUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <EmbeddedResource Include="ttf\KeepCalm-Medium.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Resource Include="Resources\Fonts\KeepCalm-Medium.ttf" />
+    <Resource Include="Resources\Images\ChargerSimulation\GRID.png" />
+    <Resource Include="Resources\Fonts\fontawesome-webfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\LOGO.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\Simulation.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\Intersection.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\Chemin.jpg" />
+    <Resource Include="Resources\Images\Documentation\Route.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\Voie.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\Direction.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\OrientationChemin.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\OrientationRoute.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\ChargerSimulation.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\CreerSimulation.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\ChargerSimulation2.jpg" />
+    <Resource Include="Resources\Images\Documentation\ChargerSimulation3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\SauvegarderSimulation.jpg" />
+    <Resource Include="Resources\Images\Documentation\SauvegarderSimulation2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\RenommerSimulation.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\SupprimerSimulation.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\SupprimerElemSimulation.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\SupprimerElemSimulation2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\ViderGrille.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\ChangerNiveauTrafic.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\ChangerTypesVehicules.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\ChangerDureeSimulation.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\LancerSimulation.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\DefinirIntersection.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\ChangerOrdreFeux.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\ChangerDirectionVoie.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Documentation\ChangerTempsFeuVert.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Simulation\libfreetype-6.dll" />
+    <EmbeddedResource Include="Resources\Simulation\libjpeg-9.dll" />
+    <EmbeddedResource Include="Resources\Simulation\libpng16-16.dll" />
+    <EmbeddedResource Include="Resources\Simulation\libtiff-5.dll" />
+    <EmbeddedResource Include="Resources\Simulation\libwebp-4.dll" />
+    <EmbeddedResource Include="Resources\Simulation\SDL2.dll" />
+    <EmbeddedResource Include="Resources\Simulation\SDL2_image.dll" />
+    <EmbeddedResource Include="Resources\Simulation\SDL2_ttf.dll" />
+    <EmbeddedResource Include="Resources\Simulation\zlib1.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="libfreetype-6.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="libjpeg-9.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="libpng16-16.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="libtiff-5.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="libwebp-4.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SDL2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SDL2_image.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SDL2_ttf.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="zlib1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\SauvegarderSimulation\Available.png" />
+    <Resource Include="Resources\Images\SauvegarderSimulation\NotAvailable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EditionIntersection\DownArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EditionIntersection\UpArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EditionIntersection\GAUCHE_DROITE.png" />
+    <Resource Include="Resources\Images\EditionIntersection\GAUCHE_TOUTDROIT.png" />
+    <Resource Include="Resources\Images\EditionIntersection\GAUCHE_TOUTDROIT_DROITE.png" />
+    <Resource Include="Resources\Images\EditionIntersection\DROITE.png" />
+    <Resource Include="Resources\Images\EditionIntersection\TOUTDROIT_DROITE.png" />
+    <Resource Include="Resources\Images\EditionIntersection\TOUTDROIT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EditionIntersection\GreenLight.png" />
+    <Resource Include="Resources\Images\EditionIntersection\YellowLight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="img\accelerer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\cercle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\LOGO.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\moins.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\pause.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\play.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\plus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\ralentir.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\square.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\stop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\HTML\Courriel.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="img\rectangle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Simulation\DraggableItems\Intersection1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Simulation\DraggableItems\Chemin0.jpg" />
+    <Resource Include="Resources\Images\Simulation\DraggableItems\Chemin1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Simulation\DraggableItems\Intersection2.jpg" />
+    <Resource Include="Resources\Images\Simulation\DraggableItems\Intersection3.jpg" />
+    <Resource Include="Resources\Images\Simulation\DraggableItems\Intersection4.jpg" />
+    <Resource Include="Resources\Images\Simulation\DraggableItems\Intersection5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Simulation\DraggableItems\Chemin2.jpg" />
+    <Resource Include="Resources\Images\Simulation\DraggableItems\Chemin3.jpg" />
+    <Resource Include="Resources\Images\Simulation\DraggableItems\Chemin4.jpg" />
+    <Resource Include="Resources\Images\Simulation\DraggableItems\Chemin5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EditionIntersection\GAUCHE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Simulation\Simulation.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EditionIntersection\Light.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.2.0.0\build\netstandard1.4\Fody.targets" Condition="Exists('..\packages\Fody.2.0.0\build\netstandard1.4\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.2.0.0\build\netstandard1.4\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.0.0\build\netstandard1.4\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets'))" />
+  </Target>
+  <Import Project="..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets')" />
+</Project>

@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="TraffiGo.Vues.Documentation.ChangerDirectionVoieDocUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TraffiGo.Vues.Documentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="480" d:DesignWidth="800">
+    <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Background="SlateGray">
+                <DockPanel>
+                    <TextBlock Text="1.Pour changer la direction d'une voie il faut d'abord sélectionner la voie dont vous voulez changer sa direction, puis changer sa direction en cliquant sur la direction dont vous voulez dans le volet ''Direction''."
+                               Style="{StaticResource DocTxt}"/>
+                    <Border BorderBrush="Black" BorderThickness="2" Style="{StaticResource DocImgBorder}">
+                        <Image Source="/Resources/Images/Documentation/ChangerDirectionVoie.jpg"/>
+                    </Border>
+                </DockPanel>
+
+                <Separator Background="Black"/>
+
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

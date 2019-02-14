@@ -1,0 +1,309 @@
+﻿<UserControl x:Class="TraffiGo.Vues.EditionIntersection.IntersectionUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:local="clr-namespace:TraffiGo.Vues.EditionIntersection"
+             mc:Ignorable="d" 
+             d:DesignHeight="574" d:DesignWidth="900">
+    <Canvas Background="{StaticResource GrayStreet}">
+        <Rectangle Height="{Binding MillieuIntersectionHeight}" Width="{Binding MillieuIntersectionWidth}" Canvas.Top="{Binding MillieuIntersectionTop}" Canvas.Left="{Binding MillieuIntersectionLeft}" Fill="{StaticResource GrayChemin}"/>
+
+        <!-- Voies Nord -->
+        <ItemsControl ItemsSource="{Binding LstVoiesNord,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Canvas.Top="{Binding VoiesNordTop}" Canvas.Left="{Binding VoiesNordLeft}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Height="{Binding Height}" Width="{Binding Width}" Margin="{Binding Margin}" Fill="{Binding Fill,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDown">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdVoieMouseDown}" CommandParameter="{Binding}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdVoieMouseEnter}" CommandParameter="{Binding}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseLeave">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdVoieMouseLeave}" CommandParameter="{Binding}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Rectangle>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!--Images directions Nord -->
+        <ItemsControl ItemsSource="{Binding LstDirectionsVoiesNord,UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Image Height="{Binding Height}" Width="{Binding Width}" Margin="{Binding Margin}" Source="{Binding Source,UpdateSourceTrigger=PropertyChanged}">
+                        <Image.RenderTransform>
+                            <RotateTransform Angle="180" />
+                        </Image.RenderTransform>
+                    </Image>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!--Images feux Nord -->
+        <ItemsControl ItemsSource="{Binding LstFeuxVoiesNord,UpdateSourceTrigger=PropertyChanged}" Panel.ZIndex="10">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="{Binding Margin}" Height="{Binding Height}" BorderBrush="{Binding Contour}" BorderThickness="4">
+                        <Image  Source="/Resources/Images/EditionIntersection/Light.png" Stretch="UniformToFill">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdFeuMouseDown}" CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseEnter">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdFeuMouseEnter}" CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseLeave">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdFeuMouseLeave}" CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Image>
+                        <Border.RenderTransform>
+                            <RotateTransform Angle="180" />
+                        </Border.RenderTransform>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+
+        <!-- Voies Est -->
+        <ItemsControl ItemsSource="{Binding LstVoiesEst,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Canvas.Top="{Binding VoiesEstTop,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Canvas.Left="{Binding VoiesEstLeft,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Height="{Binding Height}" Width="{Binding Width}" Margin="{Binding Margin}" Fill="{Binding Fill,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDown">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdVoieMouseDown}" CommandParameter="{Binding}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdVoieMouseEnter}" CommandParameter="{Binding}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseLeave">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdVoieMouseLeave}" CommandParameter="{Binding}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Rectangle>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!--Images directions Est -->
+        <ItemsControl ItemsSource="{Binding LstDirectionsVoiesEst,UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Image Height="{Binding Height}" Width="{Binding Width}" Margin="{Binding Margin}" Source="{Binding Source,UpdateSourceTrigger=PropertyChanged}">
+                        <Image.RenderTransform>
+                            <RotateTransform Angle="270" />
+                        </Image.RenderTransform>
+                    </Image>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!--Images feux Est -->
+        <ItemsControl ItemsSource="{Binding LstFeuxVoiesEst,UpdateSourceTrigger=PropertyChanged}" Panel.ZIndex="10">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="{Binding Margin}" Height="{Binding Height}" BorderBrush="{Binding Contour}" BorderThickness="4">
+                        <Image  Source="/Resources/Images/EditionIntersection/Light.png" Stretch="UniformToFill">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdFeuMouseDown}" CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseEnter">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdFeuMouseEnter}" CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseLeave">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdFeuMouseLeave}" CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Image>
+                        <Border.RenderTransform>
+                            <RotateTransform Angle="270"/>
+                        </Border.RenderTransform>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!-- Voies Sud -->
+        <ItemsControl ItemsSource="{Binding LstVoiesSud,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Canvas.Top="{Binding VoiesSudTop,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Canvas.Left="{Binding VoiesSudLeft,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Height="{Binding Height}" Width="{Binding Width}" Margin="{Binding Margin}" Fill="{Binding Fill,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDown">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdVoieMouseDown}" CommandParameter="{Binding}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdVoieMouseEnter}" CommandParameter="{Binding}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseLeave">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdVoieMouseLeave}" CommandParameter="{Binding}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Rectangle>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!--Images directions Sud -->
+        <ItemsControl ItemsSource="{Binding LstDirectionsVoiesSud,UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Image Height="{Binding Height}" Width="{Binding Width}" Margin="{Binding Margin}" Source="{Binding Source,UpdateSourceTrigger=PropertyChanged}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!--Images feux Sud -->
+        <ItemsControl ItemsSource="{Binding LstFeuxVoiesSud,UpdateSourceTrigger=PropertyChanged}" Panel.ZIndex="10">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="{Binding Margin}" Height="{Binding Height}" BorderBrush="{Binding Contour}" BorderThickness="4">
+                        <Image  Source="/Resources/Images/EditionIntersection/Light.png" Stretch="UniformToFill">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdFeuMouseDown}" CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseEnter">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdFeuMouseEnter}" CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseLeave">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdFeuMouseLeave}" CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Image>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!-- Voies Ouest -->
+        <ItemsControl ItemsSource="{Binding LstVoiesOuest,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Canvas.Top="{Binding VoiesOuestTop,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Canvas.Left="{Binding VoiesOuestLeft,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Height="{Binding Height}" Width="{Binding Width}" Margin="{Binding Margin}" Fill="{Binding Fill,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDown">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdVoieMouseDown}" CommandParameter="{Binding}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdVoieMouseEnter}" CommandParameter="{Binding}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseLeave">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdVoieMouseLeave}" CommandParameter="{Binding}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Rectangle>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!--Images directions Ouest -->
+        <ItemsControl ItemsSource="{Binding LstDirectionsVoiesOuest,UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Image Height="{Binding Height}" Width="{Binding Width}" Margin="{Binding Margin}" Source="{Binding Source,UpdateSourceTrigger=PropertyChanged}">
+                        <Image.RenderTransform>
+                            <RotateTransform Angle="90" />
+                        </Image.RenderTransform>
+                    </Image>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!--Images feux Ouest -->
+        <ItemsControl ItemsSource="{Binding LstFeuxVoiesOuest,UpdateSourceTrigger=PropertyChanged}" Panel.ZIndex="10">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="{Binding Margin}" Height="{Binding Height}" BorderBrush="{Binding Contour}" BorderThickness="4">
+                        <Image  Source="/Resources/Images/EditionIntersection/Light.png" Stretch="UniformToFill">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdFeuMouseDown}" CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseEnter">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdFeuMouseEnter}" CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseLeave">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.CmdFeuMouseLeave}" CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Image>
+                        <Border.RenderTransform>
+                            <RotateTransform Angle="90"/>
+                        </Border.RenderTransform>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+    </Canvas>
+</UserControl>
